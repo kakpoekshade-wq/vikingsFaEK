@@ -3,13 +3,17 @@
 function methodIsAllowed(string $action): bool {
     $method = $_SERVER['REQUEST_METHOD'];
     switch ($action) {
-        case 'update':
+        case 'update': 
+             return $method == 'PUT';
+        case 'patch':
+    return $method == 'PATCH';
         case 'create':
             return $method == 'PUT';
         case 'read':
             return $method == 'GET';
         case 'delete':
             return $method == 'DELETE';
+            
         default:
             return false;
     }
@@ -42,3 +46,5 @@ function validateMandatoryParams(array $data, array $mandatoryParams): bool {
     }
     return true;
 }
+
+function 

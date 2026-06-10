@@ -2,6 +2,7 @@
 require_once $_SERVER['DOCUMENT_ROOT'] . '/api/dao/viking.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/api/utils/server.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/api/viking/service.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/api/dao/weapon.php';
 
 if (!methodIsAllowed('update')) {
     returnError(405, 'Method not allowed');
@@ -17,8 +18,17 @@ $id = intval($_GET['id']);
 
 if (validateMandatoryParams($data, ['name', 'health', 'attack', 'defense'])) {
     verifyViking($data);
+    if (isset($data['weaponId']) && $data['weaponId'] !== null) {
+    $weapon = findOneWeapon($data['weaponId']);
+    if (!$weapon) {
+        returnError(404, 'Weapon not found');
+    }
+    $weaponId = intval($data['weaponId']);
+} else {
+    $weaponId = null;
+}
 
-    $updated = updateViking($id, $data['name'], $data['health'], $data['attack'], $data['defense']);
+    $updated = updateViking($id, $data['name'], $data['health'], $data['attack'], $data['defense'], $weaponId);
     if ($updated == 1) {
         returnSuccess(204);
     } elseif ($updated == 0) {

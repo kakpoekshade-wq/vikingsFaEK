@@ -33,7 +33,7 @@ CREATE TABLE `viking` (
   `attack` int NOT NULL,
   `defense` int NOT NULL,
   `health` int NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ;
 
 --
 -- Déchargement des données de la table `viking`
