@@ -21,7 +21,7 @@ function methodIsAllowed(string $action): bool {
 
 function getBody(): array {
     $body = file_get_contents('php://input');
-    return json_decode($body, true);
+    return json_decode($body, true)?? [];
 }
 
 function returnError (int $code, string $message) {
