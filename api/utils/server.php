@@ -47,4 +47,3 @@ function validateMandatoryParams(array $data, array $mandatoryParams): bool {
     return true;
 }
 
-function 
